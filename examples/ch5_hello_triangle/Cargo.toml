@@ -1,0 +1,16 @@
+[package]
+name = "ch5_hello_triangle"
+authors.workspace = true
+version.workspace = true
+edition.workspace = true
+
+
+[dependencies]
+learnopengl-utils = { workspace = true }
+bytemuck = { workspace = true }
+gl = { workspace = true }
+once_cell = { workspace = true }
+glutin = { workspace = true }
+anyhow = { workspace = true }
+thiserror = { workspace = true }
+
