@@ -136,7 +136,7 @@ mod test {
 
     #[test]
     fn test_shader() {
-        let (window, ev) = crate::init(800, 600);
+        let (_window, ev) = crate::init(800, 600);
 
 
         let shader = Shader::new(
@@ -151,7 +151,7 @@ mod test {
             |loc| unsafe { gl::Uniform4f(loc, 0.1, 0.1, 0.1, 1.0); },
         ).ok();
 
-        ev.run(|event, _, control_flow| {
+        ev.run(|_event, _, control_flow| {
             *control_flow = ControlFlow::Exit;
         })
     }
