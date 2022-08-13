@@ -8,8 +8,8 @@ edition.workspace = true
 [dependencies]
 bytemuck = { workspace = true }
 gl = { workspace = true }
-once_cell = { workspace = true }
 glutin = { workspace = true }
+once_cell = { workspace = true }
 anyhow = { workspace = true }
 thiserror = { workspace = true }
 learnopengl-utils = { workspace = true }

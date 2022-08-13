@@ -112,21 +112,35 @@ dependencies = [
  "anyhow",
  "bytemuck",
  "gl",
- "glutin 0.29.1 (git+https://github.com/rust-windowing/glutin)",
+ "glutin",
  "learnopengl-utils",
  "once_cell",
  "thiserror",
 ]
 
 [[package]]
-name = "ch6_shaders"
+name = "ch6_more_complex_vbo"
 version = "0.1.0"
 dependencies = [
  "anyhow",
  "bytemuck",
  "chrono",
  "gl",
- "glutin 0.29.1 (git+https://github.com/rust-windowing/glutin)",
+ "glutin",
+ "learnopengl-utils",
+ "once_cell",
+ "thiserror",
+]
+
+[[package]]
+name = "ch6_test_shader_lang"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "bytemuck",
+ "chrono",
+ "gl",
+ "glutin",
  "learnopengl-utils",
  "once_cell",
  "thiserror",
@@ -466,35 +480,10 @@ dependencies = [
  "cgl",
  "cocoa",
  "core-foundation",
- "glutin_egl_sys 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
- "glutin_gles2_sys 0.1.5 (registry+https://github.com/rust-lang/crates.io-index)",
- "glutin_glx_sys 0.1.8 (registry+https://github.com/rust-lang/crates.io-index)",
- "glutin_wgl_sys 0.1.5 (registry+https://github.com/rust-lang/crates.io-index)",
- "libloading",
- "log",
- "objc",
- "once_cell",
- "osmesa-sys",
- "parking_lot",
- "raw-window-handle",
- "wayland-client",
- "wayland-egl",
- "winapi",
- "winit",
-]
-
-[[package]]
-name = "glutin"
-version = "0.29.1"
-source = "git+https://github.com/rust-windowing/glutin#2f8bdfc939781a21c20acb691514149c32817540"
-dependencies = [
- "cgl",
- "cocoa",
- "core-foundation",
- "glutin_egl_sys 0.1.6 (git+https://github.com/rust-windowing/glutin)",
- "glutin_gles2_sys 0.1.5 (git+https://github.com/rust-windowing/glutin)",
- "glutin_glx_sys 0.1.8 (git+https://github.com/rust-windowing/glutin)",
- "glutin_wgl_sys 0.1.5 (git+https://github.com/rust-windowing/glutin)",
+ "glutin_egl_sys",
+ "glutin_gles2_sys",
+ "glutin_glx_sys",
+ "glutin_wgl_sys",
  "libloading",
  "log",
  "objc",
@@ -519,28 +508,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "glutin_egl_sys"
-version = "0.1.6"
-source = "git+https://github.com/rust-windowing/glutin#2f8bdfc939781a21c20acb691514149c32817540"
-dependencies = [
- "gl_generator",
- "winapi",
-]
-
-[[package]]
 name = "glutin_gles2_sys"
 version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e8094e708b730a7c8a1954f4f8a31880af00eb8a1c5b5bf85d28a0a3c6d69103"
-dependencies = [
- "gl_generator",
- "objc",
-]
-
-[[package]]
-name = "glutin_gles2_sys"
-version = "0.1.5"
-source = "git+https://github.com/rust-windowing/glutin#2f8bdfc939781a21c20acb691514149c32817540"
 dependencies = [
  "gl_generator",
  "objc",
@@ -557,27 +528,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "glutin_glx_sys"
-version = "0.1.8"
-source = "git+https://github.com/rust-windowing/glutin#2f8bdfc939781a21c20acb691514149c32817540"
-dependencies = [
- "gl_generator",
- "x11-dl",
-]
-
-[[package]]
 name = "glutin_wgl_sys"
 version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3da5951a1569dbab865c6f2a863efafff193a93caf05538d193e9e3816d21696"
-dependencies = [
- "gl_generator",
-]
-
-[[package]]
-name = "glutin_wgl_sys"
-version = "0.1.5"
-source = "git+https://github.com/rust-windowing/glutin#2f8bdfc939781a21c20acb691514149c32817540"
 dependencies = [
  "gl_generator",
 ]
@@ -644,8 +598,11 @@ checksum = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
 name = "learnopengl-utils"
 version = "0.1.0"
 dependencies = [
+ "anyhow",
  "gl",
- "glutin 0.29.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "glutin",
+ "once_cell",
+ "thiserror",
 ]
 
 [[package]]

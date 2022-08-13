@@ -3,6 +3,7 @@ members = [
     'utils',
     'examples/ch5_hello_triangle',
     'examples/ch6_shaders/test_shader_lang',
+    'examples/ch6_shaders/more_complex_vbo',
 ]
 
 [workspace.package]
@@ -14,7 +15,7 @@ edition = "2021"
 bytemuck = "1.11.0"
 gl = "0.14.0"
 once_cell = "1.13.0"
-glutin = { git = "https://github.com/rust-windowing/glutin" }
+glutin = "0.29.1"
 anyhow = "1.0.61"
 thiserror = "1.0.32"
 
