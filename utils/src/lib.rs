@@ -4,6 +4,7 @@
 use glutin::{Api, ContextBuilder, ContextWrapper, GlProfile, GlRequest, PossiblyCurrent};
 use glutin::dpi::PhysicalSize;
 use glutin::event_loop::{EventLoop, EventLoopBuilder};
+#[cfg(target_arch = "unix")]
 use glutin::platform::unix::EventLoopBuilderExtUnix;
 use glutin::window::{Window, WindowBuilder};
 
@@ -13,10 +14,11 @@ pub use shader::get_status_and_output;
 pub mod shader;
 
 pub fn init(width: u32, height: u32) -> (ContextWrapper<PossiblyCurrent, Window>, EventLoop<()>) {
-    let el = if cfg!(test) {
-        EventLoopBuilder::new()
-            .with_any_thread(true)
-            .build()
+    let el = if cfg!(test) && cfg!(target_os = "linux") {
+        let mut el = EventLoopBuilder::new();
+        #[cfg(target_os = "linux")]
+        let mut el = el.with_any_thread(true);
+        el.build()
     } else {
         EventLoop::new()
     };
