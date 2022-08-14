@@ -1,5 +1,5 @@
 [package]
-name = "ch6_more_complex_vbo"
+name = "p1ch6_more_complex_vbo_shader_utils"
 authors.workspace = true
 version.workspace = true
 edition.workspace = true
@@ -14,4 +14,4 @@ once_cell = { workspace = true }
 glutin = { workspace = true }
 anyhow = { workspace = true }
 thiserror = { workspace = true }
-chrono = "0.4.21"
+chrono = { workspace = true }

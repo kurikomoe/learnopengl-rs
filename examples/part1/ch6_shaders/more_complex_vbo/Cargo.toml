@@ -1,9 +1,10 @@
 [package]
-name = "ch5_hello_triangle"
+name = "p1ch6_more_complex_vbo"
 authors.workspace = true
 version.workspace = true
 edition.workspace = true
 
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 learnopengl-utils = { workspace = true }
@@ -13,4 +14,4 @@ once_cell = { workspace = true }
 glutin = { workspace = true }
 anyhow = { workspace = true }
 thiserror = { workspace = true }
-
+chrono = "0.4.21"

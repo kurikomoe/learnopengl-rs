@@ -13,3 +13,9 @@ glutin = { workspace = true }
 once_cell = { workspace = true }
 anyhow = { workspace = true }
 thiserror = { workspace = true }
+partial_application = "0.2.1"
+
+[[test]]
+name = "gltests"
+path = "src/shader/test/main.rs"
+harness = false

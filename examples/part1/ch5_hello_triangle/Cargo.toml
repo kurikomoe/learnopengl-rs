@@ -9,8 +9,8 @@ edition.workspace = true
 learnopengl-utils = { workspace = true }
 bytemuck = { workspace = true }
 gl = { workspace = true }
-glutin = { workspace = true }
 once_cell = { workspace = true }
+glutin = { workspace = true }
 anyhow = { workspace = true }
 thiserror = { workspace = true }
-chrono = { workspace = true }
+

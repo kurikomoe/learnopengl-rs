@@ -1,9 +1,8 @@
 use std::ffi::{CStr, CString};
 
+use anyhow::Result;
 use gl::*;
 use gl::types::*;
-
-use anyhow::Result;
 
 pub fn compile_shader(source: &str, shader_type: GLenum) -> Result<GLuint, String> {
     let src = CString::new(source).unwrap();
@@ -19,7 +18,7 @@ pub fn compile_shader(source: &str, shader_type: GLenum) -> Result<GLuint, Strin
         gl::GetShaderiv,
         gl::GetShaderInfoLog,
         shader,
-        gl::COMPILE_STATUS)
+        COMPILE_STATUS)
 }
 
 pub type IVFunc = unsafe fn(GLuint, GLenum, *mut GLint);
@@ -104,8 +103,7 @@ impl<'a> Shader<'a> {
         Ok(())
     }
 
-    // Uniform1d(location: types::GLint, x: types::GLdouble) -> ()
-    pub fn set_var<F: Fn(GLint)>(&self, varname: &str, setter: F) -> Result<()> {
+    pub fn set_variable<F: Fn(GLint)>(&self, varname: &str, setter: F) -> Result<()> {
         let varname = CString::new(varname).unwrap();
         let loc = unsafe {
             let ret = gl::GetUniformLocation(
@@ -126,33 +124,5 @@ impl<'a> Drop for Shader<'a> {
         unsafe {
             gl::DeleteProgram(self.prog);
         }
-    }
-}
-
-#[cfg(test)]
-mod test {
-    use glutin::event_loop::ControlFlow;
-    use super::*;
-
-    #[test]
-    fn test_shader() {
-        let (_window, ev) = crate::init(800, 600);
-
-
-        let shader = Shader::new(
-            include_str!("test/vertex.glsl"),
-            include_str!("test/fragment.glsl"),
-        );
-
-        shader.activate().ok();
-
-        shader.set_var(
-            "uni",
-            |loc| unsafe { gl::Uniform4f(loc, 0.1, 0.1, 0.1, 1.0); },
-        ).ok();
-
-        ev.run(|_event, _, control_flow| {
-            *control_flow = ControlFlow::Exit;
-        })
     }
 }

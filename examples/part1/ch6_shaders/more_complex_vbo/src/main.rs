@@ -11,6 +11,7 @@ use chrono::{Timelike, TimeZone};
 use gl::*;
 use glutin::event::{Event, WindowEvent};
 use glutin::event_loop::ControlFlow;
+use glutin::{ContextWrapper, PossiblyCurrent};
 
 use learnopengl_utils as utils;
 
