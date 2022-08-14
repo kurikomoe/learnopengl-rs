@@ -6,7 +6,7 @@ use glutin::event_loop::ControlFlow;
 use partial_application::partial;
 
 fn main() {
-    let (_window, ev) = crate::init_headless(800, 600);
+    let (_window, ev) = init_headless(800, 600, true);
 
 
     let shader = Shader::new(
@@ -15,10 +15,7 @@ fn main() {
     );
 
 
-    shader.set_variable(
-        "uni",
-        unsafe { partial!(gl::Uniform4f => _, 0.1, 0.1, 0.1, 1.0) },
-    ).ok();
+    shader.set_vec4("uni", (0.1, 0.1, 0.1, 1.0)).ok();
 
     shader.activate().ok();
 

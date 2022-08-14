@@ -58,6 +58,29 @@ pub struct Shader<'shader_src_life> {
     fragment_shader_src: &'shader_src_life str,
 }
 
+macro_rules! build_uniform_setter {
+    (@setter 1, $setter:tt, $loc:ident, $d:ident) => { $setter($loc, $d.0) };
+    (@setter 2, $setter:tt, $loc:ident, $d:ident) => { $setter($loc, $d.0, $d.1) };
+    (@setter 3, $setter:tt, $loc:ident, $d:ident) => { $setter($loc, $d.0, $d.1, $d.2) };
+    (@setter 4, $setter:tt, $loc:ident, $d:ident) => { $setter($loc, $d.0, $d.1, $d.2, $d.3) };
+
+    (@typer 1, $t:tt) => { ($t,) };
+    (@typer 2, $t:tt) => { ($t, $t, ) };
+    (@typer 3, $t:tt) => { ($t, $t, $t, ) };
+    (@typer 4, $t:tt) => { ($t, $t, $t, $t, ) };
+
+    ($n:tt, $func_name:ident, $t:ty, $setter:expr  ) => {
+        pub fn $func_name (&self, varname: &str, data: build_uniform_setter!(@typer $n, $t)) -> Result<()> {
+            let varname = CString::new(varname).unwrap();
+            let loc = unsafe { gl::GetUniformLocation( self.prog, varname.as_ptr() as *const _, ) };
+            assert_ne!(loc, -1);
+
+            unsafe { build_uniform_setter!(@setter $n, $setter, loc, data); }
+            Ok(())
+        }
+    };
+}
+
 impl<'a> Shader<'a> {
     pub fn new(vertex_shader_src: &'a str, fragment_shader_src: &'a str) -> Self {
         let vertex_shader = compile_shader(
@@ -96,27 +119,25 @@ impl<'a> Shader<'a> {
     }
 
     pub fn activate(&self) -> Result<()> {
-        unsafe {
-            gl::UseProgram(self.prog);
-        }
-
+        unsafe { gl::UseProgram(self.prog); }
         Ok(())
     }
 
-    pub fn set_variable<F: Fn(GLint)>(&self, varname: &str, setter: F) -> Result<()> {
-        let varname = CString::new(varname).unwrap();
-        let loc = unsafe {
-            let ret = gl::GetUniformLocation(
-                self.prog, varname.as_ptr() as *const _,
-            );
-            assert_ne!(ret, -1);
-            ret
-        };
+    build_uniform_setter!(1, set_u32, u32, Uniform1ui);
+    build_uniform_setter!(1, set_i32, i32, Uniform1i);
+    build_uniform_setter!(1, set_f32, f32, Uniform1f);
 
-        setter(loc);
+    build_uniform_setter!(2, set_vec2ui, u32, Uniform2ui);
+    build_uniform_setter!(2, set_vec2i, i32, Uniform2i);
+    build_uniform_setter!(2, set_vec2, f32, Uniform2f);
 
-        Ok(())
-    }
+    build_uniform_setter!(3, set_vec3ui, u32, Uniform3ui);
+    build_uniform_setter!(3, set_vec3i, i32, Uniform3i);
+    build_uniform_setter!(3, set_vec3, f32, Uniform3f);
+
+    build_uniform_setter!(4, set_vec4ui, u32, Uniform4ui);
+    build_uniform_setter!(4, set_vec4i, i32, Uniform4i);
+    build_uniform_setter!(4, set_vec4, f32, Uniform4f);
 }
 
 impl<'a> Drop for Shader<'a> {

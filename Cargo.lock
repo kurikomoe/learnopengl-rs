@@ -1119,6 +1119,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "p1ch7_textures_unit_test"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "bytemuck",
+ "chrono",
+ "gl",
+ "glutin",
+ "image",
+ "learnopengl-utils",
+ "once_cell",
+ "partial_application",
+ "thiserror",
+]
+
+[[package]]
 name = "parking_lot"
 version = "0.12.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
