@@ -6,8 +6,7 @@ members = [
     'examples/part1/ch6_shaders/test_shader_lang',
     'examples/part1/ch6_shaders/more_complex_vbo',
     'examples/part1/ch6_shaders/more_complex_vbo_shader_utils',
-
-    'examples/part1/ch7_textures/texture_wrapping',
+    'examples/part1/ch7_textures/texture_test',
 ]
 
 [workspace.package]
@@ -23,6 +22,7 @@ glutin = "0.29.1"
 anyhow = "1.0.61"
 thiserror = "1.0.32"
 chrono = "0.4.21"
+image = "0.24.3"
 
 [workspace.dependencies.learnopengl-utils]
 path = 'utils'

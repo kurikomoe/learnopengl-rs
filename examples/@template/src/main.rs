@@ -9,6 +9,7 @@ use std::time::{Duration, Instant};
 
 use chrono::{Timelike, TimeZone};
 use gl::*;
+use gl::types::*;
 use glutin::event::{Event, WindowEvent};
 use glutin::event_loop::ControlFlow;
 use glutin::{ContextWrapper, PossiblyCurrent};
@@ -21,16 +22,12 @@ const HEIGHT: u32 = 600;
 fn main() {
     let (windowed_context, el) = utils::init(WIDTH, HEIGHT);
 
-    let mut nr_attributes = 0;
     unsafe {
-        gl::GetIntegerv(MAX_VERTEX_ATTRIBS, &mut nr_attributes);
-
         // Draw in debug line mode
         #[cfg(debug_assertions)] {
             // gl::PolygonMode(FRONT_AND_BACK, LINE);
         }
     }
-    dbg!(nr_attributes);
 
     let vertices: &[f32] = &[
         // position      // colors

@@ -2,6 +2,7 @@
 
 use std::f64::consts::PI;
 use std::ffi::CString;
+use std::io::Cursor;
 use std::mem::{size_of, size_of_val};
 use std::ops::Add;
 use std::thread;
@@ -9,34 +10,92 @@ use std::time::{Duration, Instant};
 
 use chrono::{Timelike, TimeZone};
 use gl::*;
+use gl::types::*;
+use glutin::{ContextWrapper, PossiblyCurrent};
 use glutin::event::{Event, WindowEvent};
 use glutin::event_loop::ControlFlow;
-use glutin::{ContextWrapper, PossiblyCurrent};
+use image::io::Reader as ImgReader;
+
+use anyhow::Result;
 
 use learnopengl_utils as utils;
 
 const WIDTH: u32 = 800;
 const HEIGHT: u32 = 600;
 
-fn main() {
+fn main() -> Result<()> {
     let (windowed_context, el) = utils::init(WIDTH, HEIGHT);
 
-    let mut nr_attributes = 0;
+
+    let tex_coords: &[f32] = &[
+        0.0, 0.0,
+        1.0, 0.0,
+        0.5, 1.0,
+    ];
+    /*
+        GL_REPEAT: Repeats the texture image
+        GL_MIRRORED_REPEAT: Same as GL_REPEAT but mirrors the texture image
+        GL_CLAMP_TO_EDGE: Clamps the coordinates between 0 and 1.
+        GL_CLAMP_TO_BORDER: Coordinates outside the range are now given
+            a user-specified border color.
+     */
     unsafe {
-        gl::GetIntegerv(MAX_VERTEX_ATTRIBS, &mut nr_attributes);
+        gl::TexParameteri(TEXTURE_2D, TEXTURE_WRAP_S, MIRRORED_REPEAT as _);
+        // minifying, scale down
+        gl::TexParameteri(TEXTURE_2D, TEXTURE_MIN_FILTER, NEAREST as _);
+        // magnifying, scale up
+        gl::TexParameteri(TEXTURE_2D, TEXTURE_MAG_FILTER, LINEAR as _);
 
-        // Draw in debug line mode
-        #[cfg(debug_assertions)] {
-            // gl::PolygonMode(FRONT_AND_BACK, LINE);
-        }
+        //mipmaps
+        gl::TexParameteri(TEXTURE_2D, TEXTURE_MIN_FILTER, LINEAR_MIPMAP_LINEAR as _);
+        // No use, because mipmaps not used in scale up
+        // gl::TexParameteri(TEXTURE_2D, TEXTURE_MAG_FILTER, LINEAR_MIPMAP_LINEAR as _);
     }
-    dbg!(nr_attributes);
 
+    let data = include_bytes!("textures/wall.jpg");
+    let img = ImgReader::new(Cursor::new(data))
+        .with_guessed_format()?
+        .decode()?;
+    let w = img.width();
+    let h = img.height();
+
+    let mut tex = 0;
+    unsafe {
+        GenTextures(1, &mut tex);
+        assert_ne!(tex, 0);
+
+        BindTexture(TEXTURE_2D, tex);
+
+        TexImage2D(
+            // generate a texture_2d target
+            TEXTURE_2D,
+            // mipmap level, base level is 0
+            0,
+            // store the image in RGB format
+            RGB as _,
+            // image size
+            w as _,
+            h as _,
+            // always be 0
+            0,
+            // source image type in RGB with unsigned bytes
+            RGB,
+            UNSIGNED_BYTE,
+            // source pointer
+            img.as_bytes().as_ptr() as *const _,
+        );
+        GenerateMipmap(TEXTURE_2D);
+    }
+    drop(img);
+
+
+    let stride = 8;
     let vertices: &[f32] = &[
-        // position      // colors
-        0.0, 0.5, 0.0, 1.0, 0.0, 0.0,
-        0.5, -0.5, 0.0, 0.0, 1.0, 0.0,
-        -0.5, -0.5, 0.0, 0.0, 0.0, 1.0,
+        // position      // colors       // texture coords
+        0.5, 0.5, 0.0,   1.0, 0.0, 0.0,  1.0, 1.0,  // top right
+        0.5, -0.5, 0.0,  0.0, 1.0, 0.0,  1.0, 0.0,  // bottom right
+        -0.5, -0.5, 0.0, 0.0, 0.0, 1.0,  0.0, 0.0,  // bottom left
+        -0.5, 0.5, 0.0,  1.0, 1.0, 0.0,  0.0, 1.0,  // top left
     ];
     let mut vbo = 0;
     unsafe {
@@ -44,14 +103,15 @@ fn main() {
         BindBuffer(ARRAY_BUFFER, vbo);
         BufferData(
             ARRAY_BUFFER,
-            std::mem::size_of_val(vertices) as _,
+            size_of_val(vertices) as _,
             vertices.as_ptr() as *const _,
             STATIC_DRAW);
     }
     assert_ne!(vbo, 0);
 
     let elements: &[u32] = &[
-        0, 1, 2,
+        0, 1, 3,
+        1, 2, 3,
     ];
     let mut ebo = 0;
     unsafe {
@@ -59,7 +119,7 @@ fn main() {
         BindBuffer(ELEMENT_ARRAY_BUFFER, ebo);
         BufferData(
             ELEMENT_ARRAY_BUFFER,
-            std::mem::size_of_val(elements) as _,
+            size_of_val(elements) as _,
             elements.as_ptr() as *const _,
             STATIC_DRAW);
     }
@@ -75,16 +135,22 @@ fn main() {
 
         VertexAttribPointer(
             0, 3, FLOAT, FALSE,
-            6 * size_of::<f32>() as i32,
+            stride * size_of::<f32>() as i32,
             std::ptr::null(),
         );
         VertexAttribPointer(
             1, 3, FLOAT, FALSE,
-            6 * size_of::<f32>() as i32,
+            stride * size_of::<f32>() as i32,
             (3 * size_of::<f32>()) as *const _,
+        );
+        VertexAttribPointer(
+            2, 2, FLOAT, FALSE,
+            stride * size_of::<f32>() as i32,
+            (6 * size_of::<f32>()) as *const _,
         );
         EnableVertexAttribArray(0);
         EnableVertexAttribArray(1);
+        EnableVertexAttribArray(2);
     }
     assert_ne!(vao, 0);
 
@@ -126,9 +192,10 @@ fn main() {
 
                     shader.activate().ok();
 
+                    BindTexture(TEXTURE_2D, tex);
                     gl::BindVertexArray(vao);
                     // DrawArrays(TRIANGLES, 0, 3);
-                    DrawElements(TRIANGLES, 3, UNSIGNED_INT, std::ptr::null());
+                    DrawElements(TRIANGLES, 6, UNSIGNED_INT, std::ptr::null());
                 }
                 windowed_context.swap_buffers().ok();
             }
@@ -161,5 +228,7 @@ fn main() {
 
         *control_flow = ControlFlow::Poll;
     });
+
+    Ok(())
 }
 

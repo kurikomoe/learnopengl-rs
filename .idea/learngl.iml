@@ -13,7 +13,7 @@
       <sourceFolder url="file://$MODULE_DIR$/examples/part1/ch6_shaders/more_complex_vbo/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/examples/part1/ch6_shaders/more_complex_vbo_shader_utils/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/examples/part1/ch6_shaders/test_shader_lang/src" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/examples/part1/ch7_textures/texture_wrapping/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/examples/part1/ch7_textures/texture_test/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
