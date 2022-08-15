@@ -9,6 +9,7 @@ members = [
 
     'src/part1/ch7_textures/texture_test',
     'src/part1/ch7_textures/texture_unit_test',
+    'src/part1/ch7_textures/exercise_texture_mix_keyboard',
 ]
 
 [workspace.package]

@@ -1,5 +1,5 @@
 [package]
-name = "p1ch7_textures_unit_test"
+name = "p1_ch7_textures_unit_test"
 authors.workspace = true
 version.workspace = true
 edition.workspace = true

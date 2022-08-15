@@ -1,5 +1,3 @@
-#![feature(trait_alias)]
-#![feature(format_args_nl)]
 #![allow(dead_code)]
 
 use std::ffi::{c_void, CStr};
@@ -16,6 +14,7 @@ pub use shader::get_status_and_output;
 pub use shader::Shader;
 
 pub mod shader;
+pub mod input;
 
 /// # Safety
 /// Please ensure that gl is loaded.

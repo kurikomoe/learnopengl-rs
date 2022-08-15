@@ -1049,6 +1049,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "p1_ch7_textures_unit_test"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "bytemuck",
+ "chrono",
+ "gl",
+ "glutin",
+ "image",
+ "learnopengl-utils",
+ "once_cell",
+ "partial_application",
+ "thiserror",
+]
+
+[[package]]
 name = "p1ch5_hello_triangle"
 version = "0.1.0"
 dependencies = [
@@ -1104,7 +1120,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "p1ch7_textures_test"
+name = "p1ch7_ex_textures_unit_test"
 version = "0.1.0"
 dependencies = [
  "anyhow",
@@ -1119,7 +1135,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "p1ch7_textures_unit_test"
+name = "p1ch7_textures_test"
 version = "0.1.0"
 dependencies = [
  "anyhow",
@@ -1130,7 +1146,6 @@ dependencies = [
  "image",
  "learnopengl-utils",
  "once_cell",
- "partial_application",
  "thiserror",
 ]
 
