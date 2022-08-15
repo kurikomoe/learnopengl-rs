@@ -1049,6 +1049,91 @@ dependencies = [
 ]
 
 [[package]]
+name = "p1_ch5_hello_triangle"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "bytemuck",
+ "gl",
+ "glutin",
+ "learnopengl-utils",
+ "once_cell",
+ "thiserror",
+]
+
+[[package]]
+name = "p1_ch6_more_complex_vbo"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "bytemuck",
+ "chrono",
+ "gl",
+ "glutin",
+ "learnopengl-utils",
+ "once_cell",
+ "thiserror",
+]
+
+[[package]]
+name = "p1_ch6_more_complex_vbo_shader_utils"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "bytemuck",
+ "chrono",
+ "gl",
+ "glutin",
+ "learnopengl-utils",
+ "once_cell",
+ "thiserror",
+]
+
+[[package]]
+name = "p1_ch6_test_shader_lang"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "bytemuck",
+ "chrono",
+ "gl",
+ "glutin",
+ "learnopengl-utils",
+ "once_cell",
+ "thiserror",
+]
+
+[[package]]
+name = "p1_ch7_ex_textures_unit_test"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "bytemuck",
+ "chrono",
+ "gl",
+ "glutin",
+ "image",
+ "learnopengl-utils",
+ "once_cell",
+ "thiserror",
+]
+
+[[package]]
+name = "p1_ch7_textures_test"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "bytemuck",
+ "chrono",
+ "gl",
+ "glutin",
+ "image",
+ "learnopengl-utils",
+ "once_cell",
+ "thiserror",
+]
+
+[[package]]
 name = "p1_ch7_textures_unit_test"
 version = "0.1.0"
 dependencies = [
@@ -1061,91 +1146,6 @@ dependencies = [
  "learnopengl-utils",
  "once_cell",
  "partial_application",
- "thiserror",
-]
-
-[[package]]
-name = "p1ch5_hello_triangle"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "bytemuck",
- "gl",
- "glutin",
- "learnopengl-utils",
- "once_cell",
- "thiserror",
-]
-
-[[package]]
-name = "p1ch6_more_complex_vbo"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "bytemuck",
- "chrono",
- "gl",
- "glutin",
- "learnopengl-utils",
- "once_cell",
- "thiserror",
-]
-
-[[package]]
-name = "p1ch6_more_complex_vbo_shader_utils"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "bytemuck",
- "chrono",
- "gl",
- "glutin",
- "learnopengl-utils",
- "once_cell",
- "thiserror",
-]
-
-[[package]]
-name = "p1ch6_test_shader_lang"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "bytemuck",
- "chrono",
- "gl",
- "glutin",
- "learnopengl-utils",
- "once_cell",
- "thiserror",
-]
-
-[[package]]
-name = "p1ch7_ex_textures_unit_test"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "bytemuck",
- "chrono",
- "gl",
- "glutin",
- "image",
- "learnopengl-utils",
- "once_cell",
- "thiserror",
-]
-
-[[package]]
-name = "p1ch7_textures_test"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "bytemuck",
- "chrono",
- "gl",
- "glutin",
- "image",
- "learnopengl-utils",
- "once_cell",
  "thiserror",
 ]
 

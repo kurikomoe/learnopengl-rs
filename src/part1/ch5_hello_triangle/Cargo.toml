@@ -1,5 +1,5 @@
 [package]
-name = "p1ch5_hello_triangle"
+name = "p1_ch5_hello_triangle"
 authors.workspace = true
 version.workspace = true
 edition.workspace = true

@@ -1,5 +1,5 @@
 [package]
-name = "p1ch6_more_complex_vbo_shader_utils"
+name = "p1_ch6_more_complex_vbo_shader_utils"
 authors.workspace = true
 version.workspace = true
 edition.workspace = true

@@ -1,5 +1,5 @@
 [package]
-name = "p1ch6_more_complex_vbo"
+name = "p1_ch6_more_complex_vbo"
 authors.workspace = true
 version.workspace = true
 edition.workspace = true

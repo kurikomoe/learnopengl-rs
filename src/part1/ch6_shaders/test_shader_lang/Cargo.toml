@@ -1,5 +1,5 @@
 [package]
-name = "p1ch6_test_shader_lang"
+name = "p1_ch6_test_shader_lang"
 authors.workspace = true
 version.workspace = true
 edition.workspace = true
