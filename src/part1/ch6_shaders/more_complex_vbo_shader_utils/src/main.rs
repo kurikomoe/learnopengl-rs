@@ -90,8 +90,8 @@ fn main() {
 
 
     let shader = utils::Shader::new(
-        include_str!("shaders/vertex.glsl"),
-        include_str!("shaders/fragment.glsl"),
+        include_str!("shaders/shader1.vs.glsl"),
+        include_str!("shaders/shader1.fg.glsl"),
     );
 
     let mut frames = 0;

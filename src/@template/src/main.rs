@@ -178,8 +178,8 @@ fn main() -> Result<()> {
 
 
     let shader = utils::Shader::new(
-        include_str!("shaders/vertex.glsl"),
-        include_str!("shaders/fragment.glsl"),
+        include_str!("shaders/shader1.vs.glsl"),
+        include_str!("shaders/shader2.fg.glsl"),
     );
 
 
