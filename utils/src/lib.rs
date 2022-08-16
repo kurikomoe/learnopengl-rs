@@ -53,6 +53,7 @@ pub fn init_headless(width: u32, height: u32, debug: bool) -> (Context<PossiblyC
     gl::load_with(|s| windowed_context.get_proc_address(s));
 
     if debug {
+        #[cfg(not(target_os = "macos"))]
         unsafe { init_error_callback() }
     }
 
@@ -71,7 +72,8 @@ pub fn init(width: u32, height: u32, debug: bool) -> (ContextWrapper<PossiblyCur
     let windowed_context = ContextBuilder::new()
         .with_gl(GlRequest::Specific(Api::OpenGl, (3, 3)))
         .with_gl_profile(GlProfile::Core)
-        .with_vsync(debug)
+        .with_gl_debug_flag(debug)
+        .with_vsync(true)
         .build_windowed(wb, &el)
         .unwrap();
 
@@ -80,6 +82,7 @@ pub fn init(width: u32, height: u32, debug: bool) -> (ContextWrapper<PossiblyCur
     gl::load_with(|s| windowed_context.get_proc_address(s));
 
     if debug {
+        #[cfg(not(target_os = "macos"))]
         unsafe { init_error_callback() }
     }
 

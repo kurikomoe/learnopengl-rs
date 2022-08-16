@@ -3,8 +3,6 @@ use learnopengl_utils::shader::Shader;
 
 use glutin::event_loop::ControlFlow;
 
-use partial_application::partial;
-
 fn main() {
     let (_window, ev) = init_headless(800, 600, true);
 
