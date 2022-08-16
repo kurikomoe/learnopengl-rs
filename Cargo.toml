@@ -10,6 +10,8 @@ members = [
     'src/part1/ch7_textures/texture_test',
     'src/part1/ch7_textures/texture_unit_test',
     'src/part1/ch7_textures/exercise_texture_mix_keyboard',
+
+    'src/part1/ch8_transformations/glm',
 ]
 
 [workspace.package]
@@ -27,6 +29,7 @@ thiserror = "1.0.32"
 chrono = "0.4.21"
 image = "0.24.3"
 partial_application = "0.2.1"
+nalgebra = "0.31.1"
 
 [workspace.dependencies.learnopengl-utils]
 path = 'utils'

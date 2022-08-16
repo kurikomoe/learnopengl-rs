@@ -15,6 +15,7 @@ pub use shader::Shader;
 
 pub mod shader;
 pub mod input;
+pub mod data;
 
 /// # Safety
 /// Please ensure that gl is loaded.
