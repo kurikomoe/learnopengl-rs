@@ -120,7 +120,8 @@ fn main() -> Result<()> {
     fn load_texture(data: &[u8]) -> Result<GLuint> {
         let img = ImgReader::new(Cursor::new(data))
             .with_guessed_format()?
-            .decode()?;
+            .decode()?
+            .flipv();  // flip the image so that fit into the opengl coordination.
         let w = img.width();
         let h = img.height();
         let format = match img {

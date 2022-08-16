@@ -1,21 +1,26 @@
 use std::mem::size_of_val;
 use gl::*;
-use gl::types::*;
 
 pub mod triangle;
 
-pub type Vec4 = (f32, f32, f32, f32);
-pub type Vec3 = (f32, f32, f32);
-pub type Vec2 = (f32, f32);
+pub mod types {
+    use gl::types::*;
 
-// re-exports the opengl types to actual name
-type Uid = GLuint;
-type Id = GLuint;
-type Type = GLenum;
-pub type ProgramId = Uid;
-pub type VAOId = Uid;
-pub type VBOId = Uid;
-pub type EBOId = Uid;
+    pub type Vec4 = (f32, f32, f32, f32);
+    pub type Vec3 = (f32, f32, f32);
+    pub type Vec2 = (f32, f32);
+
+    // re-exports the opengl types to actual name
+    type Uid = GLuint;
+    type Id = GLuint;
+    type Type = GLenum;
+    pub type ProgramId = Uid;
+    pub type VAOId = Uid;
+    pub type VBOId = Uid;
+    pub type EBOId = Uid;
+}
+pub use types::*;
+
 
 pub enum UsageType {
     StaticDraw = STATIC_DRAW as _,

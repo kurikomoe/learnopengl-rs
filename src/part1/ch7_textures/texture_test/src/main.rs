@@ -55,7 +55,8 @@ fn main() -> Result<()> {
     let data = include_bytes!("textures/wall.jpg");
     let img = ImgReader::new(Cursor::new(data))
         .with_guessed_format()?
-        .decode()?;
+        .decode()?
+        .flipv();  // flip the image so that fit into the opengl coordination.
     let w = img.width();
     let h = img.height();
 
