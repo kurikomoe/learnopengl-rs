@@ -1,6 +1,8 @@
 [workspace]
 members = [
     'utils',
+    'src/testing',
+
     'src/part1/ch5_hello_triangle',
 
     'src/part1/ch6_shaders/test_shader_lang',

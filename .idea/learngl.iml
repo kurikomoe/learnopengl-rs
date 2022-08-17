@@ -23,6 +23,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/part1/ch7_textures/texture_unit_test/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/part1/ch7_textures/exercise_texture_mix_keyboard/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/part1/ch8_transformations/glm/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testing/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
