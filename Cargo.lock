@@ -764,6 +764,7 @@ dependencies = [
  "anyhow",
  "gl",
  "glutin",
+ "nalgebra",
  "once_cell",
  "partial_application",
  "thiserror",

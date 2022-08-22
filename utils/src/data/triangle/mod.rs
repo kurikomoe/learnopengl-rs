@@ -1,19 +1,26 @@
+use nalgebra::{Point, Point3};
 use crate::data;
 
-pub struct Triangle {
-    program: data::ProgramId,
-    vao: data::VertexArray,
+pub struct Triangle<const N: usize> {
+
+
+
+
+    a: Point<f32, N>,
+    b: Point<f32, N>,
+    c: Point<f32, N>,
 }
 
-impl Triangle {
-    pub fn new(program: data::ProgramId, data: &[u8]) -> Self {
-        let vbo = data::VertexBuffer::new(data, data::UsageType::StaticDraw);
-        let ebo = data::ElementBuffer::new(data, data::UsageType::StaticDraw);
+impl<const N: usize> Triangle<N> {
+    pub fn new(a: Point<f32, N>, b: Point<f32, N>, c: Point<f32, N>) -> Self {
+        // The vertex of the triangle.
 
-        let vao = data::VertexArray::new(vbo, ebo);
+        // let vbo = data::VertexBuffer::new(data, data::UsageType::StaticDraw);
+        // let ebo = data::ElementBuffer::new(data, data::UsageType::StaticDraw);
+        // let vao = data::VertexArray::new(vbo, ebo);
+
         Self {
-            program,
-            vao,
+            a, b, c
         }
     }
 }

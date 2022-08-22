@@ -1,4 +1,5 @@
-use std::mem::size_of_val;
+use anyhow::Result;
+use std::mem::{replace, size_of_val};
 use gl::*;
 
 pub mod triangle;
@@ -101,5 +102,24 @@ impl VertexArray {
             ebo,
         }
     }
+
+    pub(crate) fn ebo(&mut self, ebo: ElementBuffer) -> Result<()> {
+        self.ebo = ebo;
+        Ok(())
+    }
+
+    pub(crate) fn vbo(&mut self, vbo: VertexBuffer) -> Result<()> {
+        self.vbo = vbo;
+        Ok(())
+    }
 }
 
+impl Drop for VertexArray {
+    fn drop(&mut self) {
+        unsafe {
+            let to_del = [self.id, ];
+            DeleteVertexArrays(1, to_del.as_ptr());
+            // OpenGL will handle the unreferenced vbos & ebos.
+        }
+    }
+}

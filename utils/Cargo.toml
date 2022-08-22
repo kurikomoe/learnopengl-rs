@@ -13,7 +13,8 @@ glutin = { workspace = true }
 once_cell = { workspace = true }
 anyhow = { workspace = true }
 thiserror = { workspace = true }
-partial_application = {workspace = true}
+partial_application = {workspace = true }
+nalgebra = { workspace = true }
 
 [[test]]
 name = "gltests"
