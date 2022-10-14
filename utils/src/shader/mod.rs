@@ -1,8 +1,10 @@
 use std::ffi::{CStr, CString};
+use std::sync::Arc;
 
 use anyhow::Result;
 use gl::*;
 use gl::types::*;
+use nalgebra::{Matrix4, OMatrix};
 
 pub fn compile_shader(source: &str, shader_type: GLenum) -> Result<GLuint, String> {
     let src = CString::new(source).unwrap();
@@ -138,6 +140,21 @@ impl<'a> Shader<'a> {
     build_uniform_setter!(4, set_vec4ui, u32, Uniform4ui);
     build_uniform_setter!(4, set_vec4i, i32, Uniform4i);
     build_uniform_setter!(4, set_vec4, f32, Uniform4f);
+
+    // build_uniform_setter!(3, set_mat4fv, f32, UniformMatrix4fv);
+    // pub fn $func_name (&self, varname: &str, data: build_uniform_setter!(@typer $n, $t)) -> Result<()> {
+    pub fn set_mat4fv(&self, varname: &str, mat: Arc<Matrix4<f32>>) -> Result<()> {
+        let varname = CString::new(varname).unwrap();
+        let loc = unsafe { gl::GetUniformLocation(self.prog, varname.as_ptr() as *const _) };
+        assert_ne!(loc, -1);
+
+        unsafe {
+            let ptr = mat.as_ptr();
+            gl::UniformMatrix4fv(loc, 1, FALSE, ptr as *const _);
+        }
+
+        Ok(())
+    }
 }
 
 impl<'a> Drop for Shader<'a> {
