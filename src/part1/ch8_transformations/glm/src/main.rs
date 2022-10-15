@@ -20,24 +20,23 @@ use learnopengl_utils as utils;
 fn main() -> Result<()> {
     // glm::vec4 vec(1.0f, 0.0f, 0.0f, 1.0f);
     // Here, vec4 is (1, 0, 0) with homogeneous coordinate 1.0
-    let vec = Point3::<f32>::new(1.0, 0.0, 0.0);
-    let vec = vec.to_homogeneous();
+    // let vec = Point3::<f32>::new(1.0, 0.0, 0.0);
+    // let vec = vec.to_homogeneous();
     // glm::mat4 trans = glm::mat4(1.0f);
     // trans = glm::translate(trans, glm::vec3(1.0f, 1.0f, 0.0f));
-    let trans = Translation3::<f32>::new(1.0, 1.0, 0.0).to_homogeneous();
+    // let trans = Matrix4::identity();
+    // let trans = Translation3::<f32>::new(1.0, 1.0, 0.0).to_homogeneous();
+    let trans = Translation3::<f32>::new(0.5, -0.5, 0.0).to_homogeneous();
     // vec = trans * vec;
-    let vec = trans * vec;
-
-    dbg!(vec);
+    // let vec = trans * vec;
+    // dbg!(vec);
 
     let axisangle = Vector3::z() * std::f32::consts::FRAC_PI_2;
     let trans = Rotation3::new(axisangle).to_homogeneous();
     let trans = trans * Scale3::new(0.5, 0.5, 0.5).to_homogeneous();
 
-    let vec = trans * vec;
-
-    dbg!(vec);
-
+    // let vec = trans * vec;
+    // dbg!(vec);
 
     // Normal opengl rendering procedure
     let (windowed_context, el) = utils::init(800, 600, true);
@@ -204,8 +203,7 @@ fn main() -> Result<()> {
     shader.set_i32("texture1", (0, )).ok();
     shader.set_i32("texture2", (1, )).ok();
 
-    let mat = Arc::new(trans);
-    shader.set_mat4fv("transform", Arc::clone(&mat)).expect("TODO: panic message");
+    // shader.set_mat4fv("transform", Arc::clone(&mat)).unwrap();
 
 
     let mut frames = 0;
@@ -239,6 +237,12 @@ fn main() -> Result<()> {
                 ClearColor(0.3, 0.3, 0.3, 1.0);
                 Clear(COLOR_BUFFER_BIT);
 
+                let trans = Translation3::<f32>::new(0.5, -0.5, 0.0).to_homogeneous();
+                let axisangle = Vector3::z() * (frames as f32) / 30.0 * std::f32::consts::PI;
+                let trans = Rotation3::new(axisangle).to_homogeneous();
+                let mat = Arc::new(trans);
+
+                shader.set_mat4fv("transform", Arc::clone(&mat)).unwrap();
                 shader.set_f32("mix_rate", (mix_rate, )).ok();
 
                 DrawElements(TRIANGLES, 6, UNSIGNED_INT, std::ptr::null());
